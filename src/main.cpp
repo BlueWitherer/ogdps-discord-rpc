@@ -288,7 +288,7 @@ class $modify(MenuLayer)
 			bool isLoadedUTIL = geode::Loader::get()->isModLoaded("cheeseworks.ogdps-util");
 			bool isLoadedLTN = geode::Loader::get()->isModLoaded("cheeseworks.ogdps-level-thumbs");
 
-			if (!isLoadedUTIL || !isLoadedLTN)
+			if (!isLoadedUTIL && !isLoadedLTN)
 			{
 				auto alert = geode::createQuickPopup(
 					"Warning",
