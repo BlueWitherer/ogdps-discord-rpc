@@ -223,7 +223,7 @@ std::string getAssetKey(GJGameLevel* level) {
 			case 6:
 				return "harder";
 			case 7:
-				return "touch";
+				return "tough";
 			case 8:
 				return "insane";
 			case 9:
@@ -260,7 +260,7 @@ class $modify(MenuLayer) {
 	bool init() {
 		if (!MenuLayer::init()) return false;
 		rpc->initDiscordRP();
-		rpc->registerMod("techstudent10.discord_rich_presence");
+		rpc->registerMod("cheeseworks.ogdps-discord-rpc");
 		rpc->updateDiscordRP(MODID, "Browsing Menus", "Main Menu");
 
 		return true;

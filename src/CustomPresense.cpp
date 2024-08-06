@@ -3,7 +3,7 @@
 
 using namespace geode::prelude;
 
-static const char* APPLICATION_ID = "1178492879627366472";
+static const char* APPLICATION_ID = "1270368456939798549";
 time_t currentTime = time(0);
 
 bool isIdling = false;
@@ -14,7 +14,7 @@ class $modify(AppDelegate) {
 		if (Mod::get()->getSettingValue<bool>("idling")) {
 			isIdling = true;
 			// log::info("idle time");
-			gdrpc::GDRPC::getSharedInstance()->updateDiscordRP("techstudent10.discord_rich_presence", "idling");
+			gdrpc::GDRPC::getSharedInstance()->updateDiscordRP("cheeseworks.ogdps-discord-rpc", "idling");
 		}
 	}
 
@@ -123,7 +123,7 @@ void gdrpc::GDRPC::updateDiscordRP(
 	static std::string sensitiveStr;
 	sensitiveStr = fmt::format("{} (playing on {})", gm->m_playerName, GEODE_PLATFORM_NAME);
 	static std::string notSensitiveStr;
-	notSensitiveStr = fmt::format("Playing Geometry Dash on {}", GEODE_PLATFORM_NAME);
+	notSensitiveStr = fmt::format("Playing ObsidianGDPS on {}", GEODE_PLATFORM_NAME);
 	if (shouldShowSensitive) {
 		discordPresence.largeImageText = sensitiveStr.c_str();
 	} else {

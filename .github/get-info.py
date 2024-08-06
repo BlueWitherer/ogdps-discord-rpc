@@ -10,7 +10,7 @@ import subprocess
 
 
 
-archive = zipfile.ZipFile('techstudent10.discord_rich_presence', 'r')
+archive = zipfile.ZipFile('cheeseworks.ogdps-discord-rpc', 'r')
 eee = archive.open('changelog.md')
 eeee = []
 for eeeee in eee:
