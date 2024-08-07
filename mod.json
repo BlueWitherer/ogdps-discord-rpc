@@ -1,6 +1,6 @@
 {
 	"geode": "3.4.0",
-	"version": "v1.2.0-beta.3",
+	"version": "v1.2.0",
 	"id": "cheeseworks.ogdps-discord-rpc",
 	"name": "OGDPS Discord Rich Presence",
 	"developers": [
