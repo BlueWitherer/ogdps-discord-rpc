@@ -4,7 +4,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_OSX_ARCHITECTURES "x86_64")
 set(CMAKE_CXX_VISIBILITY_PRESET hidden)
 
-project(DiscordRichPresence VERSION 1.0.0)
+project(OGDPS-DiscordRichPresence VERSION 1.3.0)
 
 file(GLOB SOURCES
 	src/*.cpp

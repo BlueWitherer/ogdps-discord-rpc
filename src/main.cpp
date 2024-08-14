@@ -67,6 +67,9 @@ std::string convertGJDifficultyDemonToAssetKey(int difficulty)
 {
 	switch (difficulty)
 	{
+	default:
+		return "na";
+
 	case 3:
 		return "easy_demon";
 	case 4:
@@ -77,14 +80,18 @@ std::string convertGJDifficultyDemonToAssetKey(int difficulty)
 		return "insane_demon";
 	case 6:
 		return "extreme_demon";
-	}
+	};
+
 	return "na";
-}
+};
 
 std::string convertGJDifficultyToAssetKey(int difficulty)
 {
 	switch (difficulty)
 	{
+	default:
+		return "na";
+
 	case -1:
 		return "auto";
 	case 0:
@@ -99,14 +106,18 @@ std::string convertGJDifficultyToAssetKey(int difficulty)
 		return "harder";
 	case static_cast<int>(GJDifficulty::Insane):
 		return "insane";
-	}
+	};
+
 	return "na";
-}
+};
 
 std::string convertRobTopLevelToAssetKey(int lvlID)
 {
 	switch (lvlID)
 	{
+	default:
+		return "na";
+
 	case 1:
 		return "easy"; // Stereo Madness
 	case 2:
@@ -155,7 +166,9 @@ std::string convertRobTopLevelToAssetKey(int lvlID)
 		return "hard_demon"; // Explorers
 	case 3001:
 		return "hard"; // The Challenge
+
 	// Spinoffs
+
 	// Meltdown
 	case 1001:
 		return "easy"; // The Seven Seas
@@ -163,6 +176,7 @@ std::string convertRobTopLevelToAssetKey(int lvlID)
 		return "normal"; // Viking Arena
 	case 1003:
 		return "hard"; // Airborne Robots
+
 	// GD World
 	case 2001:
 		return "easy"; // Payload
@@ -184,6 +198,7 @@ std::string convertRobTopLevelToAssetKey(int lvlID)
 		return "normal"; // Round 1
 	case 2010:
 		return "normal"; // Monster Dance Off
+
 	// SubZero (i loooove gd cologne)
 	case 4001:
 		return "normal"; // Press Start
@@ -191,9 +206,10 @@ std::string convertRobTopLevelToAssetKey(int lvlID)
 		return "hard"; // Nock Em
 	case 4003:
 		return "harder"; // Power Trip
-	}
+	};
+
 	return "na";
-}
+};
 
 auto getAverageDifficulty(GJGameLevel *level)
 {
