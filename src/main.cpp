@@ -324,6 +324,10 @@ class $modify(MenuLayer)
 			};
 
 			return true;
+		}
+		else
+		{
+			return false;
 		};
 	};
 
@@ -761,35 +765,40 @@ class $modify(GJShopLayer)
 {
 	bool init(ShopType p0)
 	{
-		if (!GJShopLayer::init(p0))
-			return false;
-
-		auto orbs = fmt::format("∴{}", GameStatsManager::sharedState()->m_playerStats->valueForKey("14")->getCString());
-		auto shouldBeFunny = Mod::get()->getSettingValue<bool>("funny-mode");
-		switch (p0)
+		if (GJShopLayer::init(p0))
 		{
-		case ShopType::Normal:
-			rpc->updateDiscordRP(MODID, shouldBeFunny ? "Shopping with Zolguroth" : "Shopping with the Shopkeeper", orbs);
-			break;
-		case ShopType::Secret:
-			rpc->updateDiscordRP(MODID, "Shopping with Scratch", orbs);
-			break;
-		case ShopType::Community:
-			rpc->updateDiscordRP(MODID, "Shopping with Potbor", orbs);
-			break;
-		default:
-			if (shouldBeFunny)
-			{
-				// ⬘ seems like the best unicode diamond for the diamond shopkeeper when the ShopType enum contains all 5
-				rpc->updateDiscordRP(MODID, "Shopping Around", "At Walmart");
-			}
-			else
-			{
-				rpc->updateDiscordRP(MODID, "Shopping Around", orbs);
-			};
-		};
 
-		return true;
+			auto orbs = fmt::format("% {}", GameStatsManager::sharedState()->m_playerStats->valueForKey("14")->getCString());
+			auto shouldBeFunny = Mod::get()->getSettingValue<bool>("funny-mode");
+			switch (p0)
+			{
+			case ShopType::Normal:
+				rpc->updateDiscordRP(MODID, shouldBeFunny ? "Shopping with Zolguroth" : "Shopping with the Shopkeeper", orbs);
+				break;
+			case ShopType::Secret:
+				rpc->updateDiscordRP(MODID, "Shopping with Scratch", orbs);
+				break;
+			case ShopType::Community:
+				rpc->updateDiscordRP(MODID, "Shopping with Potbor", orbs);
+				break;
+			default:
+				if (shouldBeFunny)
+				{
+					// ⬘ seems like the best unicode diamond for the diamond shopkeeper when the ShopType enum contains all 5
+					rpc->updateDiscordRP(MODID, "Shopping Around", "At Walmart");
+				}
+				else
+				{
+					rpc->updateDiscordRP(MODID, "Shopping Around", orbs);
+				};
+			};
+
+			return true;
+		}
+		else
+		{
+			return false;
+		};
 	};
 };
 
