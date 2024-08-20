@@ -33,7 +33,7 @@
 		},
 		"show-percent": {
 			"name": "Show Percent",
-			"description": "<cr>Windows.</c> This will show your current percent in a level while in a run.",
+			"description": "<cr>Windows</c>\nThis will show your current percent in a level while in a run.",
 			"type": "bool",
 			"default": true
 		},

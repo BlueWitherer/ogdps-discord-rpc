@@ -1,5 +1,12 @@
-﻿#include <Geode/Geode.hpp>
+﻿// #include "./WineDRPCBridge.c"
+#include "../include/CustomPresense.hpp"
+
+#include <matjson.hpp>
+
+#include <Geode/Geode.hpp>
+
 #include <Geode/loader/Loader.hpp>
+#include <Geode/loader/Dispatch.hpp>
 
 #include <Geode/utils/web.hpp>
 
@@ -14,12 +21,6 @@
 #include <Geode/modify/MoreOptionsLayer.hpp>
 #include <Geode/modify/OptionsLayer.hpp>
 #include <Geode/modify/SecretLayer4.hpp>
-
-#include "../include/CustomPresense.hpp"
-#include <Geode/loader/Dispatch.hpp>
-#include <matjson.hpp>
-
-// #include "./WineDRPCBridge.c"
 
 using namespace geode::prelude;
 using namespace gdrpc;
@@ -531,10 +532,15 @@ class $modify(LevelSearchLayer)
 {
 	bool init(int p0)
 	{
-		if (!LevelSearchLayer::init(p0))
+		if (LevelSearchLayer::init(p0))
+		{
+			rpc->updateDiscordRP(MODID, "Browsing Menus", "Search Tab");
+			return true;
+		}
+		else
+		{
 			return false;
-		rpc->updateDiscordRP(MODID, "Browsing Menus", "Search Tab");
-		return true;
+		};
 	};
 };
 
@@ -542,16 +548,21 @@ class $modify(LevelInfoLayer)
 {
 	bool init(GJGameLevel * level, bool p1)
 	{
-		if (!LevelInfoLayer::init(level, p1))
-			return false;
-		bool isRated = level->m_stars.value() != 0;
+		if (LevelInfoLayer::init(level, p1))
+		{
+			bool isRated = level->m_stars.value() != 0;
 
-		rpc->updateDiscordRP(MODID,
-							 "Viewing Level",
-							 std::string(level->m_levelName) + " by " + std::string(level->m_creatorName),
-							 getAssetKey(level),
-							 (isRated) ? "Rated" : "Not Rated");
-		return true;
+			rpc->updateDiscordRP(MODID,
+								 "Viewing Level",
+								 std::string(level->m_levelName) + " by " + std::string(level->m_creatorName),
+								 getAssetKey(level),
+								 (isRated) ? "Rated" : "Not Rated");
+			return true;
+		}
+		else
+		{
+			return false;
+		};
 	};
 };
 
@@ -581,16 +592,21 @@ class $modify(MyLevelEditorLayer, LevelEditorLayer)
 {
 	bool init(GJGameLevel * level, bool p0)
 	{
-		if (!LevelEditorLayer::init(level, p0))
-			return false;
+		if (LevelEditorLayer::init(level, p0))
+		{
 
 #ifdef GEODE_IS_WINDOWS
-		this->schedule(schedule_selector(MyLevelEditorLayer::updateStatus), 1);
+			this->schedule(schedule_selector(MyLevelEditorLayer::updateStatus), 1);
 #else
-		MyLevelEditorLayer::updateStatus(69.420);
+			MyLevelEditorLayer::updateStatus(69.420);
 #endif
 
-		return true;
+			return true;
+		}
+		else
+		{
+			return false;
+		};
 	};
 
 	void updateStatus(float dt)
@@ -639,15 +655,20 @@ class $modify(MyPlayLayer, PlayLayer)
 {
 	bool init(GJGameLevel * level, bool p1, bool p2)
 	{
-		if (!PlayLayer::init(level, p1, p2))
-			return false;
+		if (PlayLayer::init(level, p1, p2))
+		{
 
-		MyPlayLayer::updateRP(true);
+			MyPlayLayer::updateRP(true);
 #ifdef GEODE_IS_WINDOWS
-		this->schedule(schedule_selector(MyPlayLayer::updateRPLoop), 1);
+			this->schedule(schedule_selector(MyPlayLayer::updateRPLoop), 1);
 #endif
 
-		return true;
+			return true;
+		}
+		else
+		{
+			return false;
+		};
 	};
 
 #ifdef GEODE_IS_MACOS
@@ -767,7 +788,6 @@ class $modify(GJShopLayer)
 	{
 		if (GJShopLayer::init(p0))
 		{
-
 			auto orbs = fmt::format("% {}", GameStatsManager::sharedState()->m_playerStats->valueForKey("14")->getCString());
 			auto shouldBeFunny = Mod::get()->getSettingValue<bool>("funny-mode");
 			switch (p0)
@@ -841,26 +861,31 @@ class $modify(SecretLayer4)
 {
 	bool init()
 	{
-		if (!SecretLayer4::init())
-			return false;
-
-		auto shouldBeFunny = Mod::get()->getSettingValue<bool>("funny-mode");
-		std::string details = "";
-		std::string state = "";
-
-		if (shouldBeFunny)
+		if (SecretLayer4::init())
 		{
-			details = "Looking up answers on";
-			state = "the wiki with the Gatekeeper";
+			auto shouldBeFunny = Mod::get()->getSettingValue<bool>("funny-mode");
+
+			std::string details = "";
+			std::string state = "";
+
+			if (shouldBeFunny)
+			{
+				details = "Looking up answers on";
+				state = "the wiki with the Gatekeeper";
+			}
+			else
+			{
+				details = "Browsing vaults";
+				state = "Chamber of Time";
+			};
+
+			rpc->updateDiscordRP(MODID, details, state);
+
+			return true;
 		}
 		else
 		{
-			details = "Browsing vaults";
-			state = "Chamber of Time";
+			return false;
 		};
-
-		rpc->updateDiscordRP(MODID, details, state);
-
-		return true;
 	};
 };
