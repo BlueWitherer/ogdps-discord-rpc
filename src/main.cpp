@@ -215,7 +215,7 @@ std::string convertRobTopLevelToAssetKey(int lvlID)
 auto getAverageDifficulty(GJGameLevel *level)
 {
 	return level->m_ratings / level->m_ratingsSum;
-}
+};
 
 std::string getAssetKey(GJGameLevel *level)
 {
@@ -225,7 +225,8 @@ std::string getAssetKey(GJGameLevel *level)
 	if (stars == 0)
 	{
 		return convertGJDifficultyToAssetKey(difficulty);
-	}
+	};
+
 	if (stars == 10)
 	{
 		auto demonKey = convertGJDifficultyDemonToAssetKey(level->m_demonDifficulty);
@@ -234,11 +235,13 @@ std::string getAssetKey(GJGameLevel *level)
 
 		// }
 		return demonKey;
-	}
+	};
+
 	if (level->m_levelID.value() < 128 || level->m_levelID.value() == 3001)
 	{
 		return convertRobTopLevelToAssetKey(level->m_levelID.value());
-	}
+	};
+
 	if (Loader::get()->isModLoaded("uproxide.more_difficulties"))
 	{
 		switch (stars)
@@ -286,10 +289,11 @@ std::string getAssetKey(GJGameLevel *level)
 			return "insane";
 		case 9:
 			return "insane";
-		}
+		};
+
 		return "na";
-	}
-}
+	};
+};
 
 class $modify(MenuLayer)
 {
@@ -579,10 +583,17 @@ std::string workingTime(int value)
 	int seconds = value % 60;
 
 	std::ostringstream stream;
+
 	if (hours > 0)
+	{
 		stream << hours << "h ";
+	};
+
 	if (minutes > 0)
+	{
 		stream << minutes << "m ";
+	};
+
 	stream << seconds << "s";
 
 	return stream.str();
