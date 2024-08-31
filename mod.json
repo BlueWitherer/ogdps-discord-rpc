@@ -7,13 +7,6 @@
 		"TechStudent10",
 		"Cheeseworks"
 	],
-	"dependencies": [
-		{
-			"id": "cheeseworks.ogdps-util",
-			"importance": "required",
-			"version": ">=1.3.0"
-		}
-	],
 	"description": "A Discord Rich Presence mod for Geode",
 	"gd": {
 		"win": "2.206",

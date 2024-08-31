@@ -36,4 +36,4 @@ else()
     target_link_libraries(${PROJECT_NAME} ${CMAKE_SOURCE_DIR}/libs/extensions/discord-rpc.lib)
 endif()
 
-setup_geode_mod(${PROJECT_NAME} EXTERNALS cheeseworks.ogdps-util:1.3.0)
+setup_geode_mod(${PROJECT_NAME})
